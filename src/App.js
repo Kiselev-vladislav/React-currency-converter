@@ -12,20 +12,20 @@ function App() {
 
   const ratesRef = useRef({});
 
-  // useEffect(() => {
-  //   fetch(
-  //     `https://api.apilayer.com/fixer/latest?base=${fromCurrency}&apikey=ELn79NtVAbnwRjKslGuq6X2ol2bGRZpE`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((json) => {
-  //       ratesRef.current = json.rates;
-  //       onChangeToPrice(1);
-  //     })
-  //     .catch((err) => {
-  //       console.warn(err);
-  //       alert("Не удалось получить информацию");
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch(
+      `https://api.apilayer.com/fixer/latest?base=${fromCurrency}&apikey=ELn79NtVAbnwRjKslGuq6X2ol2bGRZpE`
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        ratesRef.current = json.rates;
+        onChangeToPrice(1);
+      })
+      .catch((err) => {
+        console.warn(err);
+        alert("Не удалось получить информацию");
+      });
+  }, []);
 
   const onChangeFromPrice = (value) => {
     const price = value / ratesRef.current[fromCurrency];
